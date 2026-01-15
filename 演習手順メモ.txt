@@ -1,0 +1,93 @@
+
+
+
+■ 演習
+ローカル PC 上での pytest 実行
+(Windsows前提)
+
+
+
+(1) pytest インストール
+
+(※) 事前に python が動作する環境を構築しておいてください。
+
+コマンドプロンプトを起動して、
+> pip install pytest
+
+を実行。
+
+
+
+(2) ファイル配置
+
+作業用のディレクトリを用意して、
+(この例では D:\DATA\___git\exec_pytest ← ご自分の使いやすい場所でお願いします。)
+そこに移動。
+
+> D:
+> cd D:\DATA\___git\exec_pytest
+
+ここに演習用のファイル(ディレクトリ)を置く。
+
+├── conftest.py          # (※)これは置いておいてください。
+├── src
+│   └── exec_check.py   # 関数 checkA がある
+└── testcode
+    └── test_checkA.py   # そのテストコード
+
+
+
+(3) テスト実行
+
+以下のように、test_checkA.py を実行する。
+
+> python -m pytest testcode\test_checkA.py
+
+【実行例】
+--------------------------------------------------------------------------------------------------------------------------------------
+D:\DATA\___git\exec_pytest>python -m pytest testcode\test_checkA.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.12.4, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\DATA\___git\exec_pytest
+collected 5 items
+
+testcode\test_checkA.py .....                                                                                    [100%]
+
+================================================== 5 passed in 0.03s ==================================================
+D:\DATA\___git\exec_pytest>
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+これだけでは何が起こったかわからないので、詳細確認のため -v をつけてください。
+
+
+> python -m pytest -v testcode\test_checkA.py
+
+
+【実行例】
+--------------------------------------------------------------------------------------------------------------------------------------
+D:\DATA\___git\exec_pytest>python -m pytest -v testcode\test_checkA.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.12.4, pytest-9.0.2, pluggy-1.6.0 -- D:\DATA\___git\python-3.12.4-embed-amd64\python.exe
+cachedir: .pytest_cache
+rootdir: D:\DATA\___git\exec_pytest
+collected 5 items
+
+testcode/test_checkA.py::test_contains_A PASSED                                                                  [ 20%]
+testcode/test_checkA.py::test_contains_B PASSED                                                                  [ 40%]
+testcode/test_checkA.py::test_contains_C PASSED                                                                  [ 60%]
+testcode/test_checkA.py::test_does_not_contain_abc PASSED                                                        [ 80%]
+testcode/test_checkA.py::test_case_sensitivity PASSED                                                            [100%]
+
+================================================== 5 passed in 0.02s ==================================================
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+【演習】
+これが動いたら、exec_check.py や test_checkA.py の内容を
+わざとエラーが起こるように修正して実行して、
+どういう状態になるかを試してみてください。
+
+
+
